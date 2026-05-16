@@ -8,6 +8,12 @@
 A full-stack Tic-Tac-Toe pet project. Server-side game logic with two AI opponents,
 served over a REST API and played in a React web client
 
+---
+
+<img width="841" height="497" alt="image" src="https://github.com/user-attachments/assets/321cd58b-7241-4cd8-a983-f074798a9468" />
+
+---
+
 ## Features
 
 - **Two game modes** — `SOLO` (against the robot) and `DUO` (hot-seat for two players)
