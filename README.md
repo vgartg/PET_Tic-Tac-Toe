@@ -1,5 +1,10 @@
 # Tic-Tac-Toe
 
+![CI](https://github.com/vgartg/PET_Tic-Tac-Toe/actions/workflows/ci.yml/badge.svg)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-brightgreen.svg)
+![Java](https://img.shields.io/badge/Java-17-red.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
+
 A full-stack Tic-Tac-Toe pet project. Server-side game logic with two AI opponents,
 served over a REST API and played in a React web client
 
