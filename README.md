@@ -70,11 +70,14 @@ PET_Tic-Tac-Toe/
 │       ├── types.ts
 │       ├── styles.css
 │       ├── api/gameApi.ts
-│       └── components/
-│           ├── Board.tsx
-│           ├── Cell.tsx
-│           ├── GameSetup.tsx
-│           └── StatusBanner.tsx
+│       ├── components/
+│       │   ├── Board.tsx
+│       │   ├── Cell.tsx
+│       │   ├── GameSetup.tsx
+│       │   └── StatusBanner.tsx
+│       └── utils/
+│           ├── statusMessage.ts
+│           └── statusMessage.test.ts
 │
 ├── README.md
 └── .gitignore
@@ -130,6 +133,15 @@ npm run dev
 
 The dev server runs at `http://localhost:8080` and proxies `/api/*` to the
 backend on `:3000`, so start the backend first
+
+Lint and unit tests:
+
+```bash
+cd frontend
+npm run lint        # ESLint (flat config)
+npm run test        # Vitest (run once)
+npm run test:watch  # Vitest in watch mode
+```
 
 Production bundle:
 
@@ -218,7 +230,7 @@ GitHub Actions workflow at [`.github/workflows/ci.yml`](.github/workflows/ci.yml
 push and pull request against `main`. It has two parallel jobs:
 
 - **Backend** — sets up JDK 17, restores the Maven cache, runs `./mvnw test`, then builds the jar. On failure, Surefire reports are uploaded as artifacts
-- **Frontend** — sets up Node 20, runs `npm ci`, then `npm run build` (which type-checks via `tsc --noEmit` and produces the Vite production bundle)
+- **Frontend** — sets up Node 20, runs `npm ci`, then `npm run lint`, `npm run test` (Vitest), and finally `npm run build` (which type-checks via `tsc --noEmit` and produces the Vite production bundle)
 
 ## Design notes
 
