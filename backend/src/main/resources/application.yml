@@ -1,0 +1,18 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: tictactoe-backend
+  jackson:
+    serialization:
+      indent-output: false
+
+tictactoe:
+  cors:
+    allowed-origins: http://localhost:8080,http://127.0.0.1:8080
+
+logging:
+  level:
+    root: INFO
+    com.tictactoe: INFO
