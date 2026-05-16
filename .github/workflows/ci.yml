@@ -22,12 +22,10 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: maven
-
-      - name: Make Maven Wrapper executable
-        run: chmod +x mvnw
+          cache-dependency-path: backend/pom.xml
 
       - name: Run tests
-        run: ./mvnw -B -ntp test
+        run: mvn -B -ntp test
 
       - name: Upload Surefire reports on failure
         if: failure()
@@ -37,7 +35,7 @@ jobs:
           path: backend/target/surefire-reports
 
       - name: Build jar
-        run: ./mvnw -B -ntp -DskipTests package
+        run: mvn -B -ntp -DskipTests package
 
   frontend:
     name: Frontend (Node 20 / Vite)
