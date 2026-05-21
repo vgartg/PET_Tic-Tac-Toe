@@ -2,7 +2,7 @@ export type Mark = 'X' | 'O' | 'EMPTY';
 
 export type GameMode = 'SOLO' | 'DUO';
 
-export type Difficulty = 'LITE' | 'HARD';
+export type Difficulty = 'LITE' | 'HARD' | 'IMPOSSIBLE';
 
 export type GameStatus = 'IN_PROGRESS' | 'X_WON' | 'O_WON' | 'DRAW';
 
@@ -21,7 +21,7 @@ export interface GameResponse {
 export interface CreateGameRequest {
   mode: GameMode;
   difficulty?: Difficulty;
-  humanMark?: Mark;
+  humanMark?: Exclude<Mark, 'EMPTY'>;
 }
 
 export interface ApiError {
@@ -30,3 +30,23 @@ export interface ApiError {
   error: string;
   message: string;
 }
+
+export interface ScoreBoard {
+  x: number;
+  o: number;
+  draws: number;
+}
+
+export interface MoveEntry {
+  ordinal: number;
+  mark: Exclude<Mark, 'EMPTY'>;
+  cellIndex: number;
+  actor: 'you' | 'robot' | 'player';
+  phrase: string;
+}
+
+export const WINNING_LINES: readonly (readonly [number, number, number])[] = [
+  [0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8],
+  [0, 4, 8], [2, 4, 6],
+];

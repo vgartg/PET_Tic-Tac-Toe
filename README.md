@@ -1,12 +1,19 @@
 # Tic-Tac-Toe
 
 ![CI](https://github.com/vgartg/PET_Tic-Tac-Toe/actions/workflows/ci.yml/badge.svg)
+[![Deploy](https://github.com/vgartg/PET_Tic-Tac-Toe/actions/workflows/deploy.yml/badge.svg)](https://github.com/vgartg/PET_Tic-Tac-Toe/actions/workflows/deploy.yml)
+[![Live Demo](https://img.shields.io/badge/demo-live-22C55E?logo=githubpages&logoColor=white)](https://vgartg.github.io/PET_Tic-Tac-Toe/)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-brightgreen.svg)
 ![Java](https://img.shields.io/badge/Java-17-red.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 
-A full-stack Tic-Tac-Toe pet project. Server-side game logic with two AI opponents,
-served over a REST API and played in a React web client
+A full-stack Tic-Tac-Toe pet project. Server-side game logic with two robot opponents,
+served over a REST API and played in a React web client styled as a letterpress
+broadsheet — Fraunces & DM Mono on warm paper, with ink-stroke X / O marks
+
+**Live demo:** <https://vgartg.github.io/PET_Tic-Tac-Toe/> — the Pages build
+bundles a client-side port of the game logic, so the deployed broadsheet plays
+end-to-end without the Spring Boot backend
 
 ---
 
@@ -17,9 +24,10 @@ served over a REST API and played in a React web client
 ## Features
 
 - **Two game modes** — `SOLO` (against the robot) and `DUO` (hot-seat for two players)
-- **Two AI difficulties**:
+- **Three robot difficulties**:
   - `LITE` — picks a random empty cell
   - `HARD` — opens with center or a corner, then completes its own winning line when possible
+  - `IMPOSSIBLE` — full minimax (with depth discount); cannot lose, plays itself to a draw
 - **Stateless client** — game state lives on the server, keyed by a session id returned on game creation
 - **Validated REST API** with structured error responses
 - **Unit-tested** domain and service layers (JUnit 5 + AssertJ)
@@ -243,12 +251,24 @@ push and pull request against `main`. It has two parallel jobs:
 - **Backend** — sets up JDK 17, restores the Maven cache, runs `./mvnw test`, then builds the jar. On failure, Surefire reports are uploaded as artifacts
 - **Frontend** — sets up Node 20, runs `npm ci`, then `npm run lint`, `npm run test` (Vitest), and finally `npm run build` (which type-checks via `tsc --noEmit` and produces the Vite production bundle)
 
+## GitHub Pages deploy
+
+A separate workflow at [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) publishes
+the broadsheet to GitHub Pages on every push to `main`. The Pages build is run with
+`VITE_USE_LOCAL=1`, which swaps the `/api/games` calls for a TypeScript port of the
+backend (`frontend/src/api/local-generator.ts`) — same game model, same Hard / Lite
+strategies, all in-browser. Local dev still proxies `/api/*` to the live Spring Boot
+server on `:3000`
+
+One-time setup: open **Settings → Pages → Build and deployment → Source = "GitHub Actions"**.
+Subsequent deploys are automatic
+
 ## Design notes
 
 - **Domain layer (`com.tictactoe.domain`)** is pure Java with no Spring imports — it can be tested in isolation and reused outside Spring
 - **`Board`** owns cell state, win detection (8 lines), copy, and snapshot for serialization
 - **`Game`** is mutable; it advances the turn only when the move did not end the game
-- **AI players** implement a single `RobotPlayer` interface and register themselves as Spring beans. `RobotResolver` exposes them by `Difficulty`, so adding a new level is a one-class change
+- **Robot players** implement a single `RobotPlayer` interface and register themselves as Spring beans. `RobotResolver` exposes them by `Difficulty`, so adding a new level is a one-class change
 - **Sessions** are kept in `InMemoryGameSessionStore` (a `ConcurrentHashMap`). The interface is in place to swap in Redis / a database later without touching the controller or service code
 - **CORS** origins are configured in `application.yml` under `tictactoe.cors.allowed-origins`
 

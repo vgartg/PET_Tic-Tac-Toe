@@ -8,6 +8,7 @@ import com.tictactoe.domain.GameStatus;
 import com.tictactoe.domain.Mark;
 import com.tictactoe.domain.ai.HardRobot;
 import com.tictactoe.domain.ai.LiteRobot;
+import com.tictactoe.domain.ai.SmartRobot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,8 @@ class GameServiceTest {
         RandomGenerator deterministic = RandomGenerator.of("L64X128MixRandom");
         RobotResolver resolver = new RobotResolver(List.of(
                 new LiteRobot(deterministic),
-                new HardRobot(deterministic)
+                new HardRobot(deterministic),
+                new SmartRobot(deterministic)
         ));
         service = new GameService(new InMemoryGameSessionStore(), resolver);
     }
