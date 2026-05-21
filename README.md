@@ -1,8 +1,8 @@
 # Tic-Tac-Toe
 
 ![CI](https://github.com/vgartg/PET_Tic-Tac-Toe/actions/workflows/ci.yml/badge.svg)
-[![Deploy](https://github.com/vgartg/PET_Tic-Tac-Toe/actions/workflows/deploy.yml/badge.svg)](https://github.com/vgartg/PET_Tic-Tac-Toe/actions/workflows/deploy.yml)
-[![Live Demo](https://img.shields.io/badge/demo-live-22C55E?logo=githubpages&logoColor=white)](https://vgartg.github.io/PET_Tic-Tac-Toe/)
+[![Deploy](https://github.com/vgartg/PET_Tic-Tac-Toe/actions/workflows/deploy.yml/badge.svg)](https://github.com/vgartg/Tic-Tac-Toe/actions/workflows/deploy.yml)
+[![Live Demo](https://img.shields.io/badge/demo-live-22C55E?logo=githubpages&logoColor=white)](https://vgartg.github.io/Tic-Tac-Toe/)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-brightgreen.svg)
 ![Java](https://img.shields.io/badge/Java-17-red.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
@@ -11,13 +11,13 @@ A full-stack Tic-Tac-Toe pet project. Server-side game logic with two robot oppo
 served over a REST API and played in a React web client styled as a letterpress
 broadsheet — Fraunces & DM Mono on warm paper, with ink-stroke X / O marks
 
-**Live demo:** <https://vgartg.github.io/PET_Tic-Tac-Toe/> — the Pages build
+**Live demo:** <https://vgartg.github.io/Tic-Tac-Toe> — the Pages build
 bundles a client-side port of the game logic, so the deployed broadsheet plays
 end-to-end without the Spring Boot backend
 
 ---
 
-<img width="841" height="497" alt="image" src="https://github.com/user-attachments/assets/321cd58b-7241-4cd8-a983-f074798a9468" />
+<img width="1108" height="948" alt="image" src="https://github.com/user-attachments/assets/4155bda9-d09f-4430-a78a-1e8041b59339" />
 
 ---
 
